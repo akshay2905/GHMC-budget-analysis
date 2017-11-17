@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- D3, Leaflet -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title></title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    var width = 250,
+        height = 250;
+
+    var projection = d3.geo.albers()
+        .center([78.491684,17.387140 ])
+    
+        .scale(80000)
+        .translate([-31010.457214668248, 127317.7578012199]);
+    
+    var path = d3.geo.path()
+        .projection(projection);
+
+    var svg = d3.select("body").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+
+    /*d3.json("data-map/states.json", function(error, data) {
+        console.log(data.features)
+        svg.selectAll("path")
+            .data(data.features)
+            .enter()
+            .append("path")
+            .attr("d", path)
+            .attr("fill", "#ccc")
+            .attr("stroke", "#333");
+
+        })*/
+        
+    d3.json("data-map/hyderabad.json", function(error, data) {
+        console.log(data.features)
+        /*svg.selectAll("path")
+            .data(data.features)
+            .enter()
+            .append("path")
+            .attr("d", path)
+            .attr("fill", "#000")
+            .attr("stroke", "#000");
+                ;
+           */ 
+    
+
+          var b = path.bounds(data),
+              s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height),
+              t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
+
+        console.log(s,t)
+          projection
+              .scale(s)
+              .translate(t);
+
+         
+
+          svg.append("path")
+              .datum(data)
+              .attr("class", "outline")
+              .attr("d", path);
+
+    });
+    /*
+
+    d3.json("data-map/hyderabad.json", function(error, data) {
+            console.log(data)
+            svg.append("path")
+                .datum(data)
+                .attr("d", path)
+                .attr("fill","black");
+        });
+*/
+
+    </script>
+</body>
+
+</html>
