@@ -130,6 +130,19 @@
     border-top: 3px solid #ddd;
 }
 
+div#total-sum {
+    margin-bottom: 30px;
+}
+div#capital-exp-sum, div#revenue-exp-sum {
+    margin-bottom: 20px;
+}
+img#intro-logo {
+    float: right;
+    width: 50%;
+}
+img#org-photo {
+    float: right;
+}
 
     @media (min-width: 768px) {
         header .intro-text {
@@ -164,15 +177,19 @@
                     <li>
                         <a class="page-scroll" href="#portfolio">Portfolio</a>
                     </li>
+                    
                     <li>
+
                         <a class="page-scroll" href="#about">About</a>
                     </li>
+                    <!--
                     <li>
                         <a class="page-scroll" href="#team">Team</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#contact">Contact</a>
                     </li>
+                -->
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -186,9 +203,10 @@
                 <div class="jumbotron" id="header-jumbotron">
                     <h2> Greater Hyderabad Municipal Corporation </h2>
                     <div class="row corp-facts">
-                        <div class="col-lg-6" id="city-map">
+                        <div class="col-lg-3"  text-align="center">
+                            <img  id="intro-logo" src="images/charminar.png">
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-9">
                             Mayor : <strong> Bonthu Rammohan (TRS) </strong>
                             <br> Deputy mayor : Baba Fasi Uddin (TRS)
                             <br> Municipal commissioner : <strong> B. Janardhan Reddy </strong>
@@ -229,12 +247,13 @@
     <section id="portfolio" class="bg-light-gray">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 text-center">
+                <div class="col-lg-12 text-center" id="total-sum">
                     <h2 class="section-heading">Where is money being spent?</h2>
                     <h3 class="section-subheading text-muted">The money that the corporation is spending</h3>
-                    <div class="section-summary" id="expenditure-summary">
-                        Total Expenditure - <span id="expenditure-fig"></span>
-                    </div>
+                    <h3 class="section-summary" id="expenditure-summary">
+                        Total Expenditure - &#x20b9; <span id="expenditure-fig"></span> Lakhs
+                    </h3>
+                    <hr class="title-hr">
                 </div>
             </div>
             <div class="row" id="vis-expenditure">
@@ -257,17 +276,16 @@
     </section>
     <!-- Data Table -->
 
-    <section id="about" class="bg-fade-blue">
+    <section id="about" class="">
         <div class="container">
             <div class="row" id="">
-            <table id="data-table-expenditure" class="display" cellspacing="0" width="100%">
-            </table>
+                <a href="https://www.openbudgetsindia.org"><img id="org-photo" src="https://github.com/cbgaindia/design/blob/master/logo_OBI/logo_types/light_bg_logo/draft_final/logo_with_text/draft_final.png?raw=true" >
+                </a>
             </div>
         </div>
     </section>
 
-
-    <!-- About Section -->
+<!--
     <section id="about">
         <div class="container">
             <div class="row">
@@ -347,7 +365,7 @@
             </div>
         </div>
     </section>
-    <!-- Team Section -->
+    <!-- Team Section 
     <section id="team" class="bg-light-gray">
         <div class="container">
             <div class="row">
@@ -410,7 +428,7 @@
             </div>
         </div>
     </section>
-    <!-- Clients Aside -->
+    <!-- Clients Aside 
     <aside class="clients">
         <div class="container">
             <div class="row">
@@ -437,8 +455,8 @@
             </div>
         </div>
     </aside>
-    <!-- Contact Section -->
-    <section id="contact">
+    <!-- Contact Section 
+        <section id="contact">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -683,6 +701,7 @@
             </div>
         </div>
     </div>
+-->
     <!-- jQuery -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <!-- Bootstrap Core JavaScript -->

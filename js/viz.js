@@ -24,7 +24,7 @@
                 s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height),
                 t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
 
-            // console.log(s, t)
+            
             projection
                 .scale(s)
                 .translate(t);
@@ -81,7 +81,7 @@
             "width": "550"
         }
 
-        // console.log(expenditure)
+        
         var second_row = d3.select("#vis-summary").append("div")
             .attr("class", "row sum-expenditure")
             .selectAll("div")
@@ -169,10 +169,10 @@
 
 
     function money_outflow(capital_exp, revenue_exp) {
-        // console.log(capital_exp, revenue_exp)
+        
 
         function tabulate(data, columns, parent_id) {
-            // console.log("#" + parent_id,data)
+            
             var table = d3.select("#" + parent_id).append('table')
                 .attr("class", "table")
             var thead = table.append('thead')
@@ -191,7 +191,7 @@
                 .enter()
                 .append('tr')
                 .style("background-color", function(d, i, j){
-                    console.log(i, data.length/3)
+                    
                     if (i<(data.length/3)){
                         return "#88A61B"
                     }
@@ -214,7 +214,7 @@
                     } else {
 
                         return columns.map(function(column, index) {
-                            // console.log(column, index);
+                            
                             return index == 0 ? { column: column, value: row["Detailed Account Code Description"] } : { column: column, value: row[column] }
                         })
                     }
@@ -254,40 +254,52 @@
 
 
         dept_revenue = revenue_exp.filter(function(d) {
-            //console.log(d["Function"])
+            //
             return (d.record_type == "total")
         })
-        // console.log(dept_revenue)
+        
         dept_revenue = dept_revenue.sort(function(a, b) {
             return b[selected_year] - a[selected_year]
         })
-        // console.log(dept_revenue)
+        
         for (var i in dept_revenue) {
             dept_revenue[i][selected_year] = (dept_revenue[i][selected_year] * 1).toFixed(2)
             dept_revenue[i]["Percentage"] = (dept_revenue[i][selected_year] / dept_revenue[0][selected_year] * 100).toFixed(2)
         }
-        // console.log(dept_revenue)
+        
         tabulate(dept_revenue, ['Function', selected_year, "Percentage"], "revenue-exp");
 
         d3.select("#expenditure-fig").text(function(d) {
             return (parseFloat(dept_capital[0][selected_year]) + parseFloat(dept_revenue[0][selected_year]))
         })
+        .style("font-weight", "bold")
 
         var capital_summary = d3.select("#capital-exp-sum")
         
         capital_summary.append("h4")
-        .text("Capital Expenditure : "+ dept_capital[0][selected_year] + " Lakh Rs." )
+        .html("<b> Capital Expenditure : " + dept_capital[0][selected_year] + " Lakh Rs.<b>" )
 
         capital_summary.append("div")
-        .text(function(d){
-            return (parseFloat(dept_capital[0][selected_year]) / (parseFloat(dept_capital[0][selected_year]) + parseFloat(dept_revenue[0][selected_year])) *100 );
+        .html(function(d){
+            return ((parseFloat(dept_capital[0][selected_year]) / (parseFloat(dept_capital[0][selected_year]) + parseFloat(dept_revenue[0][selected_year])) *100 ).toFixed(2) + "% of Total Expenditure" );
         })
-        .attr()
+        .style("margin-left", "160px")
+
+        var revenue_summary = d3.select("#revenue-exp-sum")
+        
+        revenue_summary.append("h4")
+        .html("<b> Revenue Expenditure : " + dept_revenue[0][selected_year] + " Lakh Rs.<b>" )
+
+        revenue_summary.append("div")
+        .html(function(d){
+            return ((parseFloat(dept_revenue[0][selected_year]) / (parseFloat(dept_capital[0][selected_year]) + parseFloat(dept_revenue[0][selected_year])) *100 ).toFixed(2) + "% of Total Expenditure" );
+        })
+        .style("margin-left", "160px")
 
     }
 
     function prepare_datatable(capital_exp, revenue_exp) {
-        console.log(capital_exp)
+        
         $('#data-table-expenditure').DataTable({
             data: capital_exp,
             "order": [[ 10, "desc" ]]
@@ -317,7 +329,7 @@
     }
 
     function draw_groupbarchart(data, parent_id, config = {}) {
-        // console.log(config.width)
+        
         var formatNumber = d3.format(".1f"),
             formatCrore = function(x) {
                 return formatNumber(x / 1e7) + "Cr";
@@ -337,7 +349,7 @@
             return (v >= .9995e7 ? formatCrore : v >= .9995e5 ? formatLakh : v >= .999e3 ? formatThousand : formatLowerDenom)(x);
         }
 
-        // console.log(d3.select(parent_id).style("background", "black").style("height", "20px"), parent_id)
+        
         nv.addGraph(function() {
             var chartdata;
 
@@ -418,7 +430,7 @@
 
     function populate_data() {
         /*d3.json("datasets/greater-hyderabad-municipal-corporation-budget-summary-statement.json", function(d){
-            // console.log(d)
+            
             data_table ={}
             data_table["summary"] = d
             prepare_views(data_table)
@@ -430,7 +442,7 @@
             .await(prepare_data_table);
 
         function prepare_data_table(error, summary, capital_exp, revenue_exp) {
-            // console.log(summary)
+            
             data_table = {}
             data_table["summary"] = summary
             data_table["capital_exp"] = capital_exp
